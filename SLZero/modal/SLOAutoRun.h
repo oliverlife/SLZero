@@ -10,6 +10,7 @@
 //时间显示
 //自动游戏
 //旧公式更新
+//扫雷推理文本解释
 
 #import <Foundation/Foundation.h>
 #import "SLOGame.h"
