@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D3500E61BBA2FD600276A5F /* SLOAutoRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3500E51BBA2FD600276A5F /* SLOAutoRun.m */; settings = {ASSET_TAGS = (); }; };
+		6D40405B1BA6FD7500475F85 /* SLOGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D40405A1BA6FD7500475F85 /* SLOGame.m */; settings = {ASSET_TAGS = (); }; };
 		6D73DDFF1BA313090020A443 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73DDFE1BA313090020A443 /* main.m */; };
 		6D73DE021BA313090020A443 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73DE011BA313090020A443 /* AppDelegate.m */; };
 		6D73DE051BA313090020A443 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73DE041BA313090020A443 /* ViewController.m */; };
@@ -15,6 +17,11 @@
 		6D73DE0D1BA313090020A443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D73DE0B1BA313090020A443 /* LaunchScreen.storyboard */; };
 		6D73DE181BA313090020A443 /* SLZeroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73DE171BA313090020A443 /* SLZeroTests.m */; };
 		6D73DE231BA313090020A443 /* SLZeroUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73DE221BA313090020A443 /* SLZeroUITests.m */; };
+		6D73DE321BA31A6A0020A443 /* SLOCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73DE311BA31A6A0020A443 /* SLOCell.m */; settings = {ASSET_TAGS = (); }; };
+		6D8D14E91BBAE7B80016D044 /* SLOFormulaSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */; settings = {ASSET_TAGS = (); }; };
+		6DD4CA351BB681610002A7D6 /* OCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD4CA341BB681610002A7D6 /* OCellButton.m */; settings = {ASSET_TAGS = (); }; };
+		6DD4CA3B1BB684240002A7D6 /* SLOGameCellIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD4CA3A1BB684240002A7D6 /* SLOGameCellIndex.m */; settings = {ASSET_TAGS = (); }; };
+		6DD589811BB91D4B005A38F7 /* SLOGameFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD589801BB91D4B005A38F7 /* SLOGameFormula.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D3500E41BBA2FD600276A5F /* SLOAutoRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOAutoRun.h; path = modal/SLOAutoRun.h; sourceTree = "<group>"; };
+		6D3500E51BBA2FD600276A5F /* SLOAutoRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOAutoRun.m; path = modal/SLOAutoRun.m; sourceTree = "<group>"; };
+		6D4040591BA6FD7500475F85 /* SLOGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOGame.h; path = modal/SLOGame.h; sourceTree = "<group>"; };
+		6D40405A1BA6FD7500475F85 /* SLOGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOGame.m; path = modal/SLOGame.m; sourceTree = "<group>"; };
 		6D73DDFA1BA313090020A443 /* SLZero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLZero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D73DDFE1BA313090020A443 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6D73DE001BA313090020A443 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +62,16 @@
 		6D73DE1E1BA313090020A443 /* SLZeroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLZeroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D73DE221BA313090020A443 /* SLZeroUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLZeroUITests.m; sourceTree = "<group>"; };
 		6D73DE241BA313090020A443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D73DE301BA31A6A0020A443 /* SLOCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOCell.h; path = modal/SLOCell.h; sourceTree = "<group>"; };
+		6D73DE311BA31A6A0020A443 /* SLOCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOCell.m; path = modal/SLOCell.m; sourceTree = "<group>"; };
+		6D8D14E71BBAE7B80016D044 /* SLOFormulaSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOFormulaSet.h; path = modal/SLOFormulaSet.h; sourceTree = "<group>"; };
+		6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOFormulaSet.m; path = modal/SLOFormulaSet.m; sourceTree = "<group>"; };
+		6DD4CA331BB681610002A7D6 /* OCellButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCellButton.h; sourceTree = "<group>"; };
+		6DD4CA341BB681610002A7D6 /* OCellButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCellButton.m; sourceTree = "<group>"; };
+		6DD4CA391BB684240002A7D6 /* SLOGameCellIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOGameCellIndex.h; path = modal/SLOGameCellIndex.h; sourceTree = "<group>"; };
+		6DD4CA3A1BB684240002A7D6 /* SLOGameCellIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOGameCellIndex.m; path = modal/SLOGameCellIndex.m; sourceTree = "<group>"; };
+		6DD5897F1BB91D4B005A38F7 /* SLOGameFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOGameFormula.h; path = modal/SLOGameFormula.h; sourceTree = "<group>"; };
+		6DD589801BB91D4B005A38F7 /* SLOGameFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOGameFormula.m; path = modal/SLOGameFormula.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,12 +122,15 @@
 		6D73DDFC1BA313090020A443 /* SLZero */ = {
 			isa = PBXGroup;
 			children = (
-				6D73DE001BA313090020A443 /* AppDelegate.h */,
-				6D73DE011BA313090020A443 /* AppDelegate.m */,
+				6D73DE331BA31A720020A443 /* modal */,
 				6D73DE031BA313090020A443 /* ViewController.h */,
 				6D73DE041BA313090020A443 /* ViewController.m */,
+				6DD4CA331BB681610002A7D6 /* OCellButton.h */,
+				6DD4CA341BB681610002A7D6 /* OCellButton.m */,
 				6D73DE061BA313090020A443 /* Main.storyboard */,
 				6D73DE091BA313090020A443 /* Assets.xcassets */,
+				6D73DE001BA313090020A443 /* AppDelegate.h */,
+				6D73DE011BA313090020A443 /* AppDelegate.m */,
 				6D73DE0B1BA313090020A443 /* LaunchScreen.storyboard */,
 				6D73DE0E1BA313090020A443 /* Info.plist */,
 				6D73DDFD1BA313090020A443 /* Supporting Files */,
@@ -138,6 +162,25 @@
 				6D73DE241BA313090020A443 /* Info.plist */,
 			);
 			path = SLZeroUITests;
+			sourceTree = "<group>";
+		};
+		6D73DE331BA31A720020A443 /* modal */ = {
+			isa = PBXGroup;
+			children = (
+				6DD4CA391BB684240002A7D6 /* SLOGameCellIndex.h */,
+				6DD4CA3A1BB684240002A7D6 /* SLOGameCellIndex.m */,
+				6D4040591BA6FD7500475F85 /* SLOGame.h */,
+				6D40405A1BA6FD7500475F85 /* SLOGame.m */,
+				6D73DE301BA31A6A0020A443 /* SLOCell.h */,
+				6D73DE311BA31A6A0020A443 /* SLOCell.m */,
+				6DD5897F1BB91D4B005A38F7 /* SLOGameFormula.h */,
+				6DD589801BB91D4B005A38F7 /* SLOGameFormula.m */,
+				6D3500E41BBA2FD600276A5F /* SLOAutoRun.h */,
+				6D3500E51BBA2FD600276A5F /* SLOAutoRun.m */,
+				6D8D14E71BBAE7B80016D044 /* SLOFormulaSet.h */,
+				6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */,
+			);
+			name = modal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +250,7 @@
 				TargetAttributes = {
 					6D73DDF91BA313090020A443 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 4CPMXSEDBT;
 					};
 					6D73DE121BA313090020A443 = {
 						CreatedOnToolsVersion = 7.0;
@@ -271,7 +315,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D73DE051BA313090020A443 /* ViewController.m in Sources */,
+				6DD589811BB91D4B005A38F7 /* SLOGameFormula.m in Sources */,
+				6D8D14E91BBAE7B80016D044 /* SLOFormulaSet.m in Sources */,
+				6DD4CA351BB681610002A7D6 /* OCellButton.m in Sources */,
+				6DD4CA3B1BB684240002A7D6 /* SLOGameCellIndex.m in Sources */,
 				6D73DE021BA313090020A443 /* AppDelegate.m in Sources */,
+				6D40405B1BA6FD7500475F85 /* SLOGame.m in Sources */,
+				6D3500E61BBA2FD600276A5F /* SLOAutoRun.m in Sources */,
+				6D73DE321BA31A6A0020A443 /* SLOCell.m in Sources */,
 				6D73DDFF1BA313090020A443 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SLZero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wx.SLZero;
@@ -424,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SLZero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wx.SLZero;
@@ -498,6 +551,7 @@
 				6D73DE291BA313090020A443 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D73DE2A1BA313090020A443 /* Build configuration list for PBXNativeTarget "SLZeroTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +560,7 @@
 				6D73DE2C1BA313090020A443 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D73DE2D1BA313090020A443 /* Build configuration list for PBXNativeTarget "SLZeroUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +569,7 @@
 				6D73DE2F1BA313090020A443 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
