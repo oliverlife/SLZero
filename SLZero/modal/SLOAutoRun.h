@@ -6,12 +6,6 @@
 //  Copyright © 2015年 李智. All rights reserved.
 //
 
-//公式集缩减
-//时间显示
-//自动游戏
-//旧公式更新
-//扫雷推理文本解释
-
 #import <Foundation/Foundation.h>
 #import "SLOGame.h"
 

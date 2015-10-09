@@ -18,6 +18,7 @@
 @property(nonatomic, assign, readonly)NSUInteger size;
 @property(nonatomic, assign, readonly)BOOL isLost;
 @property(nonatomic, assign, readonly)BOOL isWin;
+@property(nonatomic, strong, readonly)NSArray* randomMineArr;
 
 - (id)initWithWidth:(NSUInteger)width height:(NSUInteger)height mineNumber:(NSUInteger)mineNumber;
 - (NSArray *)openCellWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex;

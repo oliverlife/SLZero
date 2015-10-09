@@ -11,6 +11,7 @@
 #import "OCellButton.h"
 #import "modal/SLOGameCellIndex.h"
 #import "modal/SLOAutoRun.h"
+#import "OLog.h"
 
 #define CELLWIDTH 50
 #define CELLHEIGHT 50
@@ -36,7 +37,11 @@
 - (SLOGame *)game
 {
     if(!_game)
+    {
         _game = [[SLOGame alloc] initWithWidth:self.gameWidth height:self.gameHeight mineNumber:self.mineNumber];
+        [OLog addStringInfo:@"new game"];
+        [OLog addStringInfo:[self.game.randomMineArr description]];
+    }
     
     return _game;
 }
@@ -167,6 +172,7 @@
 - (void)clickCellButton:(UIButton *)sender
 {
     SLOGameCellIndex *cellIndex = [self.game translateCellIndexWithSingleIndex:[self findCellButton:sender]];
+    BOOL testBool = [OLog addStringInfo:[cellIndex debugDescription]];
     NSArray *openedCellIndexArr = [self.game openCellWithCellIndex:cellIndex];
     {
         for(SLOGameCellIndex *openCellIndex in openedCellIndexArr)
@@ -184,11 +190,15 @@
     if(self.game.isWin)
     {
         [self.gameStateLable setText:@"Winer!"];
+        [OLog addStringInfo:@"Wined"];
     }
     else
     {
         if(self.game.isLost)
+        {
             [self.gameStateLable setText:@"LLLLosted"];
+            [OLog addStringInfo:@"LLLLosted"];
+        }
         else
             [self.gameStateLable setText:@"gogo...."];
     }

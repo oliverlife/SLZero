@@ -15,6 +15,7 @@
 @property(nonatomic, strong)NSMutableArray * cellArr;
 @property(nonatomic, assign)BOOL isLost;
 @property(nonatomic, assign)BOOL isWin;
+@property(nonatomic, strong, readwrite)NSArray* randomMineArr;
 
 @end
 
@@ -26,6 +27,14 @@
         [self constructCellArr];
     
     return _cellArr;
+}
+
+- (NSArray *)randomMineArr
+{
+    if(!_randomMineArr)
+        _randomMineArr = [self randomMine:self.size mineNumber:self.mineNumber];
+        
+    return _randomMineArr;
 }
 
 - (NSArray *)aroundCellIndex:(SLOGameCellIndex *)cellIndex
@@ -44,8 +53,7 @@
 - (void)constructCellArr
 {
     _cellArr = [[NSMutableArray alloc] initWithCapacity:self.height * self.width];
-    NSArray *randomMineArr = [self randomMine:self.size mineNumber:self.mineNumber];
-    NSLog(@"%@", randomMineArr);
+    NSArray *randomMineArr = self.randomMineArr;
     for(NSInteger yIndex = 0;yIndex < self.height;++yIndex)
     {
         for(NSInteger xIndex = 0;xIndex < self.width;++xIndex)

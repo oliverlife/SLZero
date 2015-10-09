@@ -21,4 +21,9 @@
     return self;
 }
 
+- (NSString*)debugDescription
+{
+    return [NSString stringWithFormat:@"%@:\nx = %ld,y = %ld \n", @"<SLOGameCellIndex>", self.x, self.y];
+}
+
 @end
