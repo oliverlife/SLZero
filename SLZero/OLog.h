@@ -11,5 +11,7 @@
 @interface OLog : NSObject
 
 + (BOOL)addStringInfo:(NSString*)string;
++ (BOOL)pushLog:(NSString*)string;
++ (BOOL)popLog;
 
 @end

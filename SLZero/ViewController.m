@@ -161,12 +161,14 @@
 
 - (void)autoRun:(UIButton *)sender
 {
+    [OLog pushLog:@"autoRun"];
     SLOGameCellIndex *cellIndex = [self.autoRun next];
     if(cellIndex)
     {
         OCellButton *cellButton = [self getCellButtonWithCellIndex:cellIndex];
         [cellButton setBackgroundColor:[UIColor greenColor]];
     }
+    [OLog popLog];
 }
 
 - (void)clickCellButton:(UIButton *)sender
