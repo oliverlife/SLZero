@@ -12,25 +12,23 @@ static NSMutableArray* _logStack = nil;
 
 @implementation OLog
 
-+ (BOOL)addStringInfo:(NSString *)string
++ (NSString*)addStringInfo:(NSString*)string
 {
-    BOOL returnValue = NO;
+    NSString* logString = @"";
     NSFileHandle *logHandle = [self openLogFileHandle];
     if(logHandle)
     {
-        [self fileHandleWriteStringData:logHandle string:[NSString stringWithFormat:@"%@\n", [self currentTime]]];
-        string = [NSString stringWithFormat:@"%@\n", string];
-        [self fileHandleWriteStringData:logHandle string:string];
-        returnValue = YES;
+        logString = [logString stringByAppendingString:[NSString stringWithFormat:@"%@\n", [self currentTime]]];
+        logString = [logString stringByAppendingString:[NSString stringWithFormat:@"%@\n", string]];
+        [self fileHandleWriteStringData:logHandle string:logString];
     }
     [logHandle closeFile];
-    return returnValue;
+    return logString;
 }
 
 + (BOOL) fileHandleWriteStringData:(NSFileHandle*) logHandle string:(NSString*)string
 {
     [logHandle writeData:[string dataUsingEncoding:NSUTF8StringEncoding]];
-    NSLog(@"%@", string);
     return YES;
 }
 
@@ -56,29 +54,31 @@ static NSMutableArray* _logStack = nil;
     return _logStack;
 }
 
-+ (BOOL)pushLog:(NSString*)string
++ (NSString*)pushLog:(NSString*)string
 {
+    NSString* logString = @"";
     if([self getLogStack])
     {
         NSDate* currentDate = [NSDate date];
         NSDictionary *logDict = @{@"time":[NSDate date], @"logString":[NSString stringWithFormat:@"%@(time::%@)", string, [self formatNSDate:currentDate]]};
-        [self addStringInfo:[NSString stringWithFormat:@"%@::%@", @"pushLog", logDict[@"logString"]]];
+        logString = [self addStringInfo:[NSString stringWithFormat:@"%@::%@", @"pushLog", logDict[@"logString"]]];
         [[self getLogStack] addObject:logDict];
     }
-    return YES;
+    return logString;
 }
 
-+ (BOOL)popLog
++ (NSString*)popLog
 {
+    NSString* logString = @"";
     if([[self getLogStack] count] > 0)
     {
         NSDate* currentDate = [NSDate date];
         NSDictionary *logDict = [[self getLogStack] lastObject];
         NSDate* oldDate = logDict[@"time"];
         [[self getLogStack] removeLastObject];
-        [self addStringInfo:[NSString stringWithFormat:@"%@::%@(interval::%@)",@"popLog", logDict[@"logString"], [self formatTimeInterval:[currentDate timeIntervalSinceDate:oldDate]]]];
+        logString = [self addStringInfo:[NSString stringWithFormat:@"%@::%@(interval::%@)",@"popLog", logDict[@"logString"], [self formatTimeInterval:[currentDate timeIntervalSinceDate:oldDate]]]];
     }
-    return YES;
+    return logString;
 }
 
 + (NSString*)formatTimeInterval:(NSTimeInterval) timeInterval

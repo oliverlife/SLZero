@@ -38,11 +38,11 @@
     dStr = [dStr stringByAppendingFormat:@"================\n"];
     dStr = [dStr stringByAppendingFormat:@"%ld %ld\n", self.mineNumberL, self.mineNumberR];
     
-    dStr = [dStr stringByAppendingFormat:@"cccccccccccccc\n"];
-    for(SLOGameFormula *p in self.parentFormulaArr)
-        dStr = [dStr stringByAppendingFormat:@"%@\n", p];
-    
-    dStr = [dStr stringByAppendingFormat:@"cccccccccccccc\n"];
+//    dStr = [dStr stringByAppendingFormat:@"cccccccccccccc\n"];
+//    for(SLOGameFormula *p in self.parentFormulaArr)
+//        dStr = [dStr stringByAppendingFormat:@"%@\n", p];
+//    
+//    dStr = [dStr stringByAppendingFormat:@"cccccccccccccc\n"];
     dStr = [dStr stringByAppendingFormat:@"!!!!!!!!!!!!!!!!"];
     
     return dStr;

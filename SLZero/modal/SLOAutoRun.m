@@ -9,6 +9,7 @@
 #import "SLOAutoRun.h"
 #import "SLOGameFormula.h"
 #import "SLOFormulaSet.h"
+#import "OLog.h"
 
 @interface SLOAutoRun()
 
@@ -70,9 +71,9 @@
     NSRange range2 = NSMakeRange(0, self.formulaSet.coreFormulaSet.count);
     while(range2.length > 0)
     {
-        newFormulaArr[0] = [self findNewSingleFormulaWithRange:range1 withOtherRange:range2];
-        newFormulaArr[1] = [self findNewSingleFormulaWithRange:range2 withOtherRange:range1];
-        newFormulaArr[2] = [self findNewSingleFormulaWithRange:range2 withOtherRange:range2];
+        newFormulaArr[0] = [self findNewFormulaWithRange:range1 withOtherRange:range2];
+        newFormulaArr[1] = [self findNewFormulaWithRange:range2 withOtherRange:range1];
+        newFormulaArr[2] = [self findNewFormulaWithRange:range2 withOtherRange:range2];
         
         for(NSUInteger i = 0;i < newFormulaArrCount;++i)
         {
@@ -83,10 +84,17 @@
         range1 = NSMakeRange(0, range2.location + range2.length);
         range2 = NSMakeRange(range1.length, self.formulaSet.coreFormulaSet.count - range1.length);
     }
-    NSLog(@"count = %lu", [self.formulaSet.coreFormulaSet count]);
+//    NSUInteger j = 0;
+//    for(SLOGameFormula * formula in self.formulaSet.coreFormulaSet)
+//    {
+//        if(formula && [formula.cellIndexArr count] == formula.mineNumberL && formula.mineNumberR - formula.mineNumberL == 1)
+//            ++j;
+//        [OLog addStringInfo:[formula description]];
+//    }
+    NSLog(@"updateFormulaSet count = %lu", [self.formulaSet.coreFormulaSet count]);
 }
 
-- (NSArray *)findNewSingleFormulaWithRange:(NSRange)range withOtherRange:(NSRange)otherRange
+- (NSArray *)findNewFormulaWithRange:(NSRange)range withOtherRange:(NSRange)otherRange
 {
     NSMutableArray *newFormulaArr = [NSMutableArray array];
     for(NSUInteger i = range.location;i < range.location + range.length;++i)

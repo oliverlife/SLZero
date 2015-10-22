@@ -10,8 +10,8 @@
 
 @interface OLog : NSObject
 
-+ (BOOL)addStringInfo:(NSString*)string;
-+ (BOOL)pushLog:(NSString*)string;
-+ (BOOL)popLog;
++ (NSString*)addStringInfo:(NSString*)string;
++ (NSString*)pushLog:(NSString*)string;
++ (NSString*)popLog;
 
 @end

@@ -13,8 +13,8 @@
 #import "modal/SLOAutoRun.h"
 #import "OLog.h"
 
-#define CELLWIDTH 50
-#define CELLHEIGHT 50
+#define CELLWIDTH 40
+#define CELLHEIGHT 40
 #define CELLSIZE CGSizeMake(CELLWIDTH, CELLHEIGHT)
 #define CELLZONEORIGIN CGPointMake(10,10)
 
@@ -27,8 +27,10 @@
 @property (nonatomic, strong)NSArray *cellArr;
 @property(nonatomic, strong)UIButton *resetGameButton;
 @property(nonatomic, strong)UILabel *gameStateLable;
+@property(nonatomic, strong)UILabel *gameCellIndexInfo;
 @property(nonatomic, strong)SLOAutoRun *autoRun;
 @property(nonatomic, strong)UIButton *autoRunButton;
+@property(nonatomic, strong)UITextView *runInfoView;
 
 @end
 
@@ -39,8 +41,8 @@
     if(!_game)
     {
         _game = [[SLOGame alloc] initWithWidth:self.gameWidth height:self.gameHeight mineNumber:self.mineNumber];
-        [OLog addStringInfo:@"new game"];
-        [OLog addStringInfo:[self.game.randomMineArr description]];
+        [self addLogInfo:@"new game"];
+        [self addLogInfo:[self.game.randomMineArr description]];
     }
     
     return _game;
@@ -78,6 +80,21 @@
     return _gameStateLable;
 }
 
+- (UITextView *)runInfoView
+{
+    if(!_runInfoView)
+        _runInfoView = [[UITextView alloc] init];
+    
+    return _runInfoView;
+}
+- (UILabel *)gameCellIndexInfo
+{
+    if(!_gameCellIndexInfo)
+        _gameCellIndexInfo = [[UILabel alloc] init];
+    
+    return _gameCellIndexInfo;
+}
+
 - (NSArray *)cellArr
 {
     if(!_cellArr)
@@ -107,7 +124,12 @@
     [self updateAllView];
 }
 
-- (void)updateAllView
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self updateRunInfoView:@""];
+}
+
+-(void)updateAllView
 {
     [self updateMineView];
     [self updateGameStateLable];
@@ -123,6 +145,11 @@
         [cellButton addTarget:self
                     action:@selector(clickCellButton:)
           forControlEvents:UIControlEventTouchUpInside
+         ];
+        
+        [cellButton addTarget:self
+                       action:@selector(clickCellButton:)
+             forControlEvents:UIControlEventTouchUpInside
          ];
         
         [self.view addSubview:cellButton];
@@ -149,6 +176,24 @@
     [self.autoRunButton addTarget:self action:@selector(autoRun:) forControlEvents:UIControlEventTouchUpInside];
     
     [self layoutGameStateLable];
+    [self layoutRunInfoView];
+}
+
+- (void)layoutRunInfoView
+{
+    CGRect runInfoRect = CGRectMake(CELLWIDTH, (self.game.height + 3) * CELLHEIGHT, CELLSIZE.width * self.game.width , CELLSIZE.height * 6);
+    [self.runInfoView setFrame:runInfoRect];
+    [self.view addSubview:self.runInfoView];
+    self.runInfoView.editable = NO;
+    self.runInfoView.font = [UIFont systemFontOfSize:17];
+    self.runInfoView.layer.borderWidth =1.0;
+}
+
+- (void)updateRunInfoView:(NSString *)infoString
+{
+    self.runInfoView.text = [self.runInfoView.text stringByAppendingString:infoString];
+    [self.runInfoView scrollRangeToVisible:NSMakeRange(self.runInfoView.text.length, 1)];
+    self.runInfoView.layoutManager.allowsNonContiguousLayout = NO;
 }
 
 - (void)layoutGameStateLable
@@ -159,23 +204,37 @@
     [self.gameStateLable setBackgroundColor:[[UIColor alloc] initWithRed:0.0 green:162 / 255.0 blue:232 / 255.0 alpha:1.0]];
 }
 
+- (void)layoutGameCellIndexInfo
+{
+    CGRect gameStateLabelRect = CGRectMake(CELLWIDTH * 11, (self.game.height + 1) * CELLHEIGHT, CELLSIZE.width * 2, CELLSIZE.height);
+    [self.gameCellIndexInfo setFrame:gameStateLabelRect];
+    [self.view addSubview:self.gameCellIndexInfo];
+    [self.gameCellIndexInfo setBackgroundColor:[[UIColor alloc] initWithRed:0.0 green:162 / 255.0 blue:232 / 255.0 alpha:1.0]];
+}
+
+- (void)updateGameCellIndexInfo:(SLOGameCellIndex *)cellIndex;
+{
+    [self.gameCellIndexInfo setText:[cellIndex description]];
+}
+
 - (void)autoRun:(UIButton *)sender
 {
-    [OLog pushLog:@"autoRun"];
+    [self pushLog:@"autoRun"];
     SLOGameCellIndex *cellIndex = [self.autoRun next];
     if(cellIndex)
     {
         OCellButton *cellButton = [self getCellButtonWithCellIndex:cellIndex];
         [cellButton setBackgroundColor:[UIColor greenColor]];
     }
-    [OLog popLog];
+    [self popLog];
 }
 
 - (void)clickCellButton:(UIButton *)sender
 {
     SLOGameCellIndex *cellIndex = [self.game translateCellIndexWithSingleIndex:[self findCellButton:sender]];
-    BOOL testBool = [OLog addStringInfo:[cellIndex debugDescription]];
+    [self addLogInfo:[cellIndex debugDescription]];
     NSArray *openedCellIndexArr = [self.game openCellWithCellIndex:cellIndex];
+    [self addLogInfo:[NSString stringWithFormat:@"openedCell = %lu", [openedCellIndexArr count]]];
     {
         for(SLOGameCellIndex *openCellIndex in openedCellIndexArr)
         {
@@ -192,14 +251,14 @@
     if(self.game.isWin)
     {
         [self.gameStateLable setText:@"Winer!"];
-        [OLog addStringInfo:@"Wined"];
+        [self addLogInfo:@"Wined"];
     }
     else
     {
         if(self.game.isLost)
         {
             [self.gameStateLable setText:@"LLLLosted"];
-            [OLog addStringInfo:@"LLLLosted"];
+            [self addLogInfo:@"LLLLosted"];
         }
         else
             [self.gameStateLable setText:@"gogo...."];
@@ -251,6 +310,30 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSString*)addLogInfo:(NSString*)string
+{
+    NSString *logInfo = [OLog addStringInfo:string];
+    NSLog(@"%@", logInfo);
+    [self updateRunInfoView:logInfo];
+    return logInfo;
+}
+
+- (NSString*)pushLog:(NSString*)string
+{
+    NSString *logInfo = [OLog pushLog:string];
+    NSLog(@"%@", logInfo);
+    [self updateRunInfoView:logInfo];
+    return logInfo;
+}
+
+- (NSString*)popLog
+{
+    NSString *logInfo = [OLog popLog];
+    NSLog(@"%@", logInfo);
+    [self updateRunInfoView:logInfo];
+    return logInfo;
 }
 
 @end
