@@ -38,7 +38,15 @@
 
 - (void)resetFormulaSet
 {
-    [self addBasicFormulaSet];
+    //[self addBasicFormulaSet];
+    for(SLOGameCellIndex * cellIndex in [self.game allCellIndex])
+    {
+        if([self.game getCellWithCellIndex:cellIndex].isOpened)
+        {
+            [self updateFormulaSetWithCellIndex:cellIndex];
+            [self updateFormulaSetWithCellIndexArr:[self.game aroundCellIndex:cellIndex]];
+        }
+    }
 }
 
 - (void)addBasicFormulaSet

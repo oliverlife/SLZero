@@ -66,24 +66,32 @@
 {
     const NSUInteger newFormulaArrCount = 3;
     NSArray *newFormulaArr[newFormulaArrCount] = {nil, nil, nil};
-    BOOL isChanged = NO;
-    NSRange range1 = NSMakeRange(0, 0);
-    NSRange range2 = NSMakeRange(0, self.formulaSet.coreFormulaSet.count);
-    while(range2.length > 0)
-    {
-        newFormulaArr[0] = [self findNewFormulaWithRange:range1 withOtherRange:range2];
-        newFormulaArr[1] = [self findNewFormulaWithRange:range2 withOtherRange:range1];
-        newFormulaArr[2] = [self findNewFormulaWithRange:range2 withOtherRange:range2];
-        
-        for(NSUInteger i = 0;i < newFormulaArrCount;++i)
+    BOOL isChanged = YES;
+    BOOL isChangedEx = NO;
+    do{
+        NSRange range1 = NSMakeRange(0, 0);
+        NSRange range2 = NSMakeRange(0, self.formulaSet.coreFormulaSet.count);
+        isChangedEx = NO;
+        //isChanged = YES;
+        while(isChanged)
         {
-            for(SLOGameFormula *formula in newFormulaArr[i])
-                isChanged = [self.formulaSet addObject:formula] || isChanged;
+            newFormulaArr[0] = [self findNewFormulaWithRange:range1 withOtherRange:range2];
+            newFormulaArr[1] = [self findNewFormulaWithRange:range2 withOtherRange:range1];
+            newFormulaArr[2] = [self findNewFormulaWithRange:range2 withOtherRange:range2];
+            
+            isChanged = NO;
+            for(NSUInteger i = 0;i < newFormulaArrCount;++i)
+            {
+                for(SLOGameFormula *formula in newFormulaArr[i])
+                    isChanged = [self.formulaSet addObject:formula] || isChanged;
+            }
+            if(isChangedEx == NO && isChanged == YES)
+                isChangedEx = YES;
+            
+            range1 = NSMakeRange(0, range2.location + range2.length);
+            range2 = NSMakeRange(range1.length, self.formulaSet.coreFormulaSet.count - range1.length);
         }
-        
-        range1 = NSMakeRange(0, range2.location + range2.length);
-        range2 = NSMakeRange(range1.length, self.formulaSet.coreFormulaSet.count - range1.length);
-    }
+    }while(isChangedEx);
 //    NSUInteger j = 0;
 //    for(SLOGameFormula * formula in self.formulaSet.coreFormulaSet)
 //    {
@@ -150,18 +158,9 @@
     returnValue = [self nextEmptyCell];
     if(!returnValue)
     {
-        //[self updateFormulaSet];
-        //returnValue = [self nextEmptyCell];
-        //if(!returnValue)
-        //{
-            //[self clearFormulaSet];
-            //returnValue = [self nextEmptyCell];
-            //if(!returnValue)
-            {
-                [self updateFormulaSet];
-                returnValue = [self nextEmptyCell];
-            }
-        //}
+        [self clearFormulaSet];
+        [self updateFormulaSet];
+        returnValue = [self nextEmptyCell];
     }
     return returnValue;
 }

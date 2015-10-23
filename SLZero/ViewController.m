@@ -13,8 +13,8 @@
 #import "modal/SLOAutoRun.h"
 #import "OLog.h"
 
-#define CELLWIDTH 40
-#define CELLHEIGHT 40
+#define CELLWIDTH 20
+#define CELLHEIGHT 20
 #define CELLSIZE CGSizeMake(CELLWIDTH, CELLHEIGHT)
 #define CELLZONEORIGIN CGPointMake(10,10)
 
@@ -122,9 +122,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.gameWidth = 20;
-    self.gameHeight = 10;
-    self.mineNumber = 40;
+    self.gameWidth = 30;
+    self.gameHeight = 16;
+    self.mineNumber = 99;
     
 }
 
@@ -246,7 +246,7 @@
         OCellButton *cellButton = [self getCellButtonWithCellIndex:cellIndex];
         [cellButton setBackgroundColor:[UIColor greenColor]];
         [[NSOperationQueue mainQueue] addOperation:[NSBlockOperation blockOperationWithBlock:^{
-            [NSThread sleepForTimeInterval:0.5];
+            //[NSThread sleepForTimeInterval:0.5];
             [self clickCellButton:cellButton];
             [self autoRun:nil];
         }]];
@@ -255,7 +255,9 @@
 
 - (void)clickCellButton:(UIButton *)sender
 {
+    [self pushLog:@"findButtonIndex"];
     SLOGameCellIndex *cellIndex = [self.game translateCellIndexWithSingleIndex:[self findCellButton:sender]];
+    [self popLog];
     [self addLogInfo:[cellIndex debugDescription]];
     NSArray *openedCellIndexArr = [self.game openCellWithCellIndex:cellIndex];
     [self addLogInfo:[NSString stringWithFormat:@"openedCell = %lu", [openedCellIndexArr count]]];
