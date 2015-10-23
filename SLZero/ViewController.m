@@ -31,16 +31,26 @@
 @property(nonatomic, strong)SLOAutoRun *autoRun;
 @property(nonatomic, strong)UIButton *autoRunButton;
 @property(nonatomic, strong)UITextView *runInfoView;
+@property(nonatomic, strong)NSOperationQueue *backgroundQueue;
 
 @end
 
 @implementation ViewController
+
+- (NSOperationQueue *)backgroundQueue
+{
+    if(!_backgroundQueue)
+        _backgroundQueue = [[NSOperationQueue alloc] init];
+    
+    return _backgroundQueue;
+}
 
 - (SLOGame *)game
 {
     if(!_game)
     {
         _game = [[SLOGame alloc] initWithWidth:self.gameWidth height:self.gameHeight mineNumber:self.mineNumber];
+        [self pushLog:@"startGame"];
         [self addLogInfo:@"new game"];
         [self addLogInfo:[self.game.randomMineArr description]];
     }
@@ -220,13 +230,27 @@
 - (void)autoRun:(UIButton *)sender
 {
     [self pushLog:@"autoRun"];
-    SLOGameCellIndex *cellIndex = [self.autoRun next];
+    NSOperation *autoRunOpeation = [NSBlockOperation blockOperationWithBlock:^{
+        SLOGameCellIndex *cellIndex = [self.autoRun next];
+        NSInvocationOperation *autoRunFinishedOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(autoRunFinished:) object:cellIndex];
+        [[NSOperationQueue mainQueue] addOperation:autoRunFinishedOperation];
+    }];
+    [self.backgroundQueue addOperation:autoRunOpeation];
+}
+
+- (void)autoRunFinished:(SLOGameCellIndex *)cellIndex
+{
+    [self popLog];
     if(cellIndex)
     {
         OCellButton *cellButton = [self getCellButtonWithCellIndex:cellIndex];
         [cellButton setBackgroundColor:[UIColor greenColor]];
+        [[NSOperationQueue mainQueue] addOperation:[NSBlockOperation blockOperationWithBlock:^{
+            [NSThread sleepForTimeInterval:0.5];
+            [self clickCellButton:cellButton];
+            [self autoRun:nil];
+        }]];
     }
-    [self popLog];
 }
 
 - (void)clickCellButton:(UIButton *)sender
@@ -252,6 +276,7 @@
     {
         [self.gameStateLable setText:@"Winer!"];
         [self addLogInfo:@"Wined"];
+        [self popLog];
     }
     else
     {
@@ -259,6 +284,7 @@
         {
             [self.gameStateLable setText:@"LLLLosted"];
             [self addLogInfo:@"LLLLosted"];
+            [self popLog];
         }
         else
             [self.gameStateLable setText:@"gogo...."];
