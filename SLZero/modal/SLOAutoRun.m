@@ -72,7 +72,7 @@
         NSRange range1 = NSMakeRange(0, 0);
         NSRange range2 = NSMakeRange(0, self.formulaSet.coreFormulaSet.count);
         isChangedEx = NO;
-        //isChanged = YES;
+        isChanged = YES;
         while(isChanged)
         {
             newFormulaArr[0] = [self findNewFormulaWithRange:range1 withOtherRange:range2];
