@@ -13,8 +13,8 @@
 #import "modal/SLOAutoRun.h"
 #import "OLog.h"
 
-#define CELLWIDTH 20
-#define CELLHEIGHT 20
+#define CELLWIDTH 30
+#define CELLHEIGHT 30
 #define CELLSIZE CGSizeMake(CELLWIDTH, CELLHEIGHT)
 #define CELLZONEORIGIN CGPointMake(10,10)
 
@@ -30,6 +30,7 @@
 @property(nonatomic, strong)UILabel *gameCellIndexInfo;
 @property(nonatomic, strong)SLOAutoRun *autoRun;
 @property(nonatomic, strong)UIButton *autoRunButton;
+@property(nonatomic, strong)UIButton *starButton;
 @property(nonatomic, strong)UITextView *runInfoView;
 @property(nonatomic, strong)NSOperationQueue *backgroundQueue;
 
@@ -72,6 +73,14 @@
         _autoRunButton = [[UIButton alloc] init];
     
     return _autoRunButton;
+}
+
+- (UIButton *)starButton
+{
+    if(!_starButton)
+        _starButton = [[UIButton alloc] init];
+    
+    return _starButton;
 }
 
 - (UIButton *)resetGameButton
@@ -187,6 +196,22 @@
     
     [self layoutGameStateLable];
     [self layoutRunInfoView];
+    [self layoutStarButton];
+}
+
+- (void)layoutStarButton
+{
+    CGRect starButtonRect = CGRectMake(CELLWIDTH * 11, (self.game.height + 1) * CELLHEIGHT, CELLSIZE.width * 2, CELLSIZE.height);
+    [self.starButton setFrame:starButtonRect];
+    [self.view addSubview:self.starButton];
+    [self.starButton setTitle:@"star" forState:UIControlStateNormal];
+    [self.starButton setBackgroundColor:[[UIColor alloc] initWithRed:251 / 256.0 green:194 / 256.0 blue:44/256.0 alpha:1.0]];
+    [self.starButton addTarget:self action:@selector(addStar:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)addStar:(UIButton *)sender
+{
+    [self addLogInfo:@"=============star=================="];
 }
 
 - (void)layoutRunInfoView
@@ -197,13 +222,13 @@
     self.runInfoView.editable = NO;
     self.runInfoView.font = [UIFont systemFontOfSize:17];
     self.runInfoView.layer.borderWidth =1.0;
+    self.runInfoView.layoutManager.allowsNonContiguousLayout = NO;
 }
 
 - (void)updateRunInfoView:(NSString *)infoString
 {
     self.runInfoView.text = [self.runInfoView.text stringByAppendingString:infoString];
     [self.runInfoView scrollRangeToVisible:NSMakeRange(self.runInfoView.text.length, 1)];
-    self.runInfoView.layoutManager.allowsNonContiguousLayout = NO;
 }
 
 - (void)layoutGameStateLable
@@ -229,7 +254,7 @@
 
 - (void)autoRun:(UIButton *)sender
 {
-    [self pushLog:@"autoRun"];
+    [self pushLog:@"auto"];
     NSOperation *autoRunOpeation = [NSBlockOperation blockOperationWithBlock:^{
         SLOGameCellIndex *cellIndex = [self.autoRun next];
         NSInvocationOperation *autoRunFinishedOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(autoRunFinished:) object:cellIndex];
