@@ -7,6 +7,7 @@
 //
 
 #import "SLOFormulaSet.h"
+#import "../OLog.h"
 
 @interface SLOFormulaSet()
 
@@ -39,6 +40,7 @@
 - (void)resetFormulaSet
 {
     //[self addBasicFormulaSet];
+    [OLog pushLog:@"resetFormulaSet"];
     for(SLOGameCellIndex * cellIndex in [self.game allCellIndex])
     {
         if([self.game getCellWithCellIndex:cellIndex].isOpened)
@@ -47,6 +49,7 @@
             [self updateFormulaSetWithCellIndexArr:[self.game aroundCellIndex:cellIndex]];
         }
     }
+    [OLog popLog];
 }
 
 - (void)addBasicFormulaSet

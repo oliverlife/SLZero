@@ -31,6 +31,7 @@
 @property(nonatomic, strong)SLOAutoRun *autoRun;
 @property(nonatomic, strong)UIButton *autoRunButton;
 @property(nonatomic, strong)UIButton *starButton;
+@property(nonatomic, strong)UIButton *nextStepButton;
 @property(nonatomic, strong)UITextView *runInfoView;
 @property(nonatomic, strong)NSOperationQueue *backgroundQueue;
 
@@ -73,6 +74,14 @@
         _autoRunButton = [[UIButton alloc] init];
     
     return _autoRunButton;
+}
+
+- (UIButton *)nextStepButton
+{
+    if(!_nextStepButton)
+        _nextStepButton = [[UIButton alloc] init];
+    
+    return _nextStepButton;
 }
 
 - (UIButton *)starButton
@@ -131,9 +140,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.gameWidth = 30;
-    self.gameHeight = 16;
-    self.mineNumber = 99;
+    self.gameWidth = 20;
+    self.gameHeight = 10;
+    self.mineNumber = 40;
     
 }
 
@@ -197,6 +206,26 @@
     [self layoutGameStateLable];
     [self layoutRunInfoView];
     [self layoutStarButton];
+    [self layoutNextStepButton];
+}
+
+- (void)layoutNextStepButton
+{
+    CGRect nextStepButtonRect = CGRectMake(CELLWIDTH * 14, (self.game.height + 1) * CELLHEIGHT, CELLSIZE.width * 2, CELLSIZE.height);
+    [self.nextStepButton setFrame:nextStepButtonRect];
+    [self.view addSubview:self.nextStepButton];
+    [self.nextStepButton setTitle:@"nextStep" forState:UIControlStateNormal];
+    [self.nextStepButton setBackgroundColor:[[UIColor alloc] initWithRed:251 / 256.0 green:194 / 256.0 blue:44/256.0 alpha:1.0]];
+    [self.nextStepButton addTarget:self action:@selector(nextStep:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)nextStep:(UIButton *)sender
+{
+    [self backgroundAutoRun:^(OCellButton *cellButton)
+     {
+         //[NSThread sleepForTimeInterval:0.5];
+         //[self clickCellButton:cellButton];
+     }];
 }
 
 - (void)layoutStarButton
@@ -254,35 +283,43 @@
 
 - (void)autoRun:(UIButton *)sender
 {
-    [self pushLog:@"auto"];
+    [self backgroundAutoRun:^(OCellButton *cellButton)
+     {
+         [NSThread sleepForTimeInterval:0.5];
+         [self clickCellButton:cellButton];
+         [self autoRun:nil];
+     }];
+}
+
+- (void)backgroundAutoRun:(void(^)(OCellButton *))block
+{
+    [self pushLog:@"backgroundAutoRun"];
     NSOperation *autoRunOpeation = [NSBlockOperation blockOperationWithBlock:^{
         SLOGameCellIndex *cellIndex = [self.autoRun next];
-        NSInvocationOperation *autoRunFinishedOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(autoRunFinished:) object:cellIndex];
+        NSBlockOperation *autoRunFinishedOperation = [NSBlockOperation blockOperationWithBlock:^{
+            [self autoRunFinished:cellIndex block:block];
+        }];
         [[NSOperationQueue mainQueue] addOperation:autoRunFinishedOperation];
     }];
     [self.backgroundQueue addOperation:autoRunOpeation];
 }
 
-- (void)autoRunFinished:(SLOGameCellIndex *)cellIndex
+- (void)autoRunFinished:(SLOGameCellIndex *)cellIndex block:(void(^)(OCellButton *))block
 {
     [self popLog];
-    if(cellIndex)
+    OCellButton *cellButton = [self getCellButtonWithCellIndex:cellIndex];
+    if(cellButton)
     {
-        OCellButton *cellButton = [self getCellButtonWithCellIndex:cellIndex];
         [cellButton setBackgroundColor:[UIColor greenColor]];
         [[NSOperationQueue mainQueue] addOperation:[NSBlockOperation blockOperationWithBlock:^{
-            //[NSThread sleepForTimeInterval:0.5];
-            [self clickCellButton:cellButton];
-            [self autoRun:nil];
+            block(cellButton);
         }]];
     }
 }
 
 - (void)clickCellButton:(UIButton *)sender
 {
-    [self pushLog:@"findButtonIndex"];
     SLOGameCellIndex *cellIndex = [self.game translateCellIndexWithSingleIndex:[self findCellButton:sender]];
-    [self popLog];
     [self addLogInfo:[cellIndex debugDescription]];
     NSArray *openedCellIndexArr = [self.game openCellWithCellIndex:cellIndex];
     [self addLogInfo:[NSString stringWithFormat:@"openedCell = %lu", [openedCellIndexArr count]]];
@@ -357,7 +394,10 @@
 
 - (OCellButton *)getCellButtonWithCellIndex:(SLOGameCellIndex *)cellIndex
 {
-    return self.cellArr[cellIndex.y * self.game.width + cellIndex.x];
+    if(cellIndex)
+        return self.cellArr[cellIndex.y * self.game.width + cellIndex.x];
+    else
+        return nil;
 }
 
 - (void)didReceiveMemoryWarning {
