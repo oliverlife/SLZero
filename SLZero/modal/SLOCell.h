@@ -12,6 +12,11 @@ typedef NSString * SLOCellStateType;
 
 @interface SLOCell : NSObject
 
+@property(nonatomic, assign) BOOL isOpen;
+@property(nonatomic, assign) BOOL isFlag;
+@property(nonatomic, assign) BOOL isQFlag;
+@property(nonatomic, assign) NSInteger number;
+
 - (id)initWithNumber:(NSInteger)number;
 - (SLOCellStateType)setOpen;
 - (SLOCellStateType)setFlag;
@@ -19,4 +24,8 @@ typedef NSString * SLOCellStateType;
 - (SLOCellStateType)clearFlag;
 - (SLOCellStateType)getState;
 - (BOOL)isOpened;
+
+- (NSData *)toData;
++ (SLOCell *)fromWithData: (NSData *) data;
+
 @end

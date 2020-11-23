@@ -11,10 +11,6 @@
 @interface SLOCell()
 {
 }
-@property(nonatomic, assign) BOOL isOpen;
-@property(nonatomic, assign) BOOL isFlag;
-@property(nonatomic, assign) BOOL isQFlag;
-@property(nonatomic, assign) NSInteger number;
 
 @end
 
@@ -97,6 +93,31 @@
             stateStr = @"Q";
     }
     return stateStr;
+}
+
+- (NSData *)toData {
+    NSDictionary * dict = @{
+        @"isOpen": @(self.isOpen),
+        @"isFlag": @(self.isFlag),
+        @"isQFlag": @(self.isQFlag),
+        @"number": @(self.number),
+    };
+    
+    return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+}
+
++ (SLOCell *)fromWithData: (NSData *) data {
+    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    BOOL isOpen = [dict[@"isOpen"] boolValue];
+    BOOL isFlag = [dict[@"isFlag"] boolValue];
+    BOOL isQFlag = [dict[@"isQFlag"] boolValue];
+    NSInteger number = [dict[@"number"] integerValue];
+    
+    SLOCell * result = [[SLOCell alloc] initWithNumber:number];
+    result.isOpen = isOpen;
+    result.isFlag = isFlag;
+    result.isQFlag = isQFlag;
+    return result;
 }
 
 @end
