@@ -6,7 +6,9 @@
 //  Copyright © 2015年 李智. All rights reserved.
 //
 
+#import <Foundation/NSObjCRuntime.h>
 #import "SLOGame.h"
+
 #define MineFlag @(1)
 #define NonMineFlag @(0)
 
@@ -217,6 +219,47 @@
         [allCellIndexArr addObject:[self translateCellIndexWithSingleIndex:i]];
 
     return allCellIndexArr;
+}
+
+- (BOOL)isEqual:(id)object {
+    if (![object isKindOfClass: SLOGame.class]) {
+        return NO;
+    }
+    
+    SLOGame * other = object;
+    
+    return self.height == other.height
+        && self.width == other.width
+        && self.mineNumber == other.mineNumber
+        && self.isLost == other.isLost
+        && self.isWin == other.isWin;
+}
+
+- (NSData *)toData {
+    NSDictionary * dict = @{
+        @"height": @(self.height),
+        @"width": @(self.width),
+        @"mineNumber": @(self.mineNumber),
+        @"isLost": @(self.isLost),
+        @"isWin": @(self.isWin),
+//        @"randomMineArr": self.randomMineArr,
+//        @"cellArr": self.cellArr,
+    };
+    
+    return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+}
+
++ (SLOGame *)fromWithData: (NSData *) data {
+    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    
+    NSUInteger height = [dict[@"height"] unsignedIntegerValue];
+    NSUInteger width = [dict[@"width"] unsignedIntegerValue];
+    NSUInteger mineNumber = [dict[@"mineNumber"] unsignedIntegerValue];
+    NSUInteger isLost = [dict[@"isLost"] boolValue];
+    NSUInteger isWin = [dict[@"isWin"] boolValue];
+    
+    SLOGame * result = [[SLOGame alloc] initWithWidth:width height:height mineNumber:mineNumber];
+    return result;
 }
 
 @end

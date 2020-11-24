@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "SLOCell.h"
+#import "SLOGame.h"
 
 @interface SLZeroTests : XCTestCase
 
@@ -49,6 +50,12 @@
     
     [cell isOpen];
     [self testSLOCell: cell other: [SLOCell fromWithData:[cell toData]]];
+}
+
+- (void)testSLOGameSeri {
+    SLOGame * game = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
+    SLOGame * game2 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
+    XCTAssertEqualObjects(game, game2);
 }
 
 - (void)testPerformanceExample {
