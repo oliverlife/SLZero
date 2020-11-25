@@ -95,6 +95,19 @@
     return stateStr;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if (![object isKindOfClass:SLOCell.class]) {
+        return NO;
+    }
+    
+    SLOCell * other = object;
+    return self.number == other.number
+        && self.isOpen == other.isOpen
+        && self.isFlag == other.isFlag
+        && self.isQFlag == other.isQFlag;
+}
+
 - (NSData *)toData {
     NSDictionary * dict = @{
         @"isOpen": @(self.isOpen),
