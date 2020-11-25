@@ -248,11 +248,11 @@
 //        @"cellArr": self.cellArr,
     };
     
-    return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    return [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:nil];
 }
 
 + (SLOGame *)fromWithData: (NSData *) data {
-    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSDictionary * dict = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListMutableContainersAndLeaves format:nil error:nil];
     
     NSUInteger height = [dict[@"height"] unsignedIntegerValue];
     NSUInteger width = [dict[@"width"] unsignedIntegerValue];
