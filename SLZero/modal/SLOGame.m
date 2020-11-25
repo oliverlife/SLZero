@@ -266,10 +266,17 @@
     NSUInteger isWin = [dict[@"isWin"] boolValue];
     NSArray * randomMineArr = dict[@"randomMineArr"];
     
+    NSArray * cellDataArr = dict[@"cellArr"];
+    NSMutableArray * cellArr = [NSMutableArray array];
+    for(NSUInteger i = 0; i < cellDataArr.count; ++i) {
+        [cellArr addObject:[SLOCell fromWithData:cellDataArr[i]]];
+    }
+    
     SLOGame * result = [[SLOGame alloc] initWithWidth:width height:height mineNumber:mineNumber];
     result.isLost = isLost;
     result.isWin = isWin;
     result.randomMineArr = randomMineArr;
+    result.cellArr = cellArr;
     return result;
 }
 
