@@ -30,4 +30,8 @@
 - (BOOL)isValidIndexWithCellIndex:(SLOGameCellIndex *)cellIndex;
 - (NSArray *)aroundCellIndex:(SLOGameCellIndex *)cellIndex;
 - (NSArray *)allCellIndex;
+
+- (NSData *)toData;
++ (SLOGame *)fromWithData: (NSData *) data;
+
 @end

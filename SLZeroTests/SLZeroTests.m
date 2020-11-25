@@ -54,7 +54,7 @@
 
 - (void)testSLOGameSeri {
     SLOGame * game = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
-    SLOGame * game2 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
+    SLOGame * game2 = [SLOGame fromWithData: [game toData]];
     XCTAssertEqualObjects(game, game2);
 }
 

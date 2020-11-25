@@ -128,6 +128,7 @@
             _size = self.width * self.height;
             _isLost = NO;
             _isWin = NO;
+            self.cellArr;
         }
     }
     else
@@ -232,7 +233,8 @@
         && self.width == other.width
         && self.mineNumber == other.mineNumber
         && self.isLost == other.isLost
-        && self.isWin == other.isWin;
+        && self.isWin == other.isWin
+        && [self.randomMineArr isEqualToArray: other.randomMineArr];
 }
 
 - (NSData *)toData {
@@ -242,7 +244,7 @@
         @"mineNumber": @(self.mineNumber),
         @"isLost": @(self.isLost),
         @"isWin": @(self.isWin),
-//        @"randomMineArr": self.randomMineArr,
+        @"randomMineArr": self.randomMineArr,
 //        @"cellArr": self.cellArr,
     };
     
@@ -257,8 +259,12 @@
     NSUInteger mineNumber = [dict[@"mineNumber"] unsignedIntegerValue];
     NSUInteger isLost = [dict[@"isLost"] boolValue];
     NSUInteger isWin = [dict[@"isWin"] boolValue];
+    NSArray * randomMineArr = dict[@"randomMineArr"];
     
     SLOGame * result = [[SLOGame alloc] initWithWidth:width height:height mineNumber:mineNumber];
+    result.isLost = isLost;
+    result.isWin = isWin;
+    result.randomMineArr = randomMineArr;
     return result;
 }
 
