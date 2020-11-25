@@ -228,16 +228,21 @@
     }
     
     SLOGame * other = object;
-    
     return self.height == other.height
         && self.width == other.width
         && self.mineNumber == other.mineNumber
         && self.isLost == other.isLost
         && self.isWin == other.isWin
-        && [self.randomMineArr isEqualToArray: other.randomMineArr];
+        && [self.randomMineArr isEqualToArray: other.randomMineArr]
+        && [self.cellArr isEqualToArray: other.cellArr];
 }
 
 - (NSData *)toData {
+    NSMutableArray * cellDataArr = [NSMutableArray array];
+    for(NSUInteger i = 0; i < self.cellArr.count; ++i) {
+        [cellDataArr addObject:[self.cellArr[i] toData]];
+    }
+    
     NSDictionary * dict = @{
         @"height": @(self.height),
         @"width": @(self.width),
@@ -245,7 +250,7 @@
         @"isLost": @(self.isLost),
         @"isWin": @(self.isWin),
         @"randomMineArr": self.randomMineArr,
-//        @"cellArr": self.cellArr,
+        @"cellArr": cellDataArr,
     };
     
     return [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:nil];

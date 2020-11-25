@@ -31,25 +31,50 @@
     // Use XCTAssert and related functions to verify your tests produce the correct results.
 }
 
-- (void)testSLOCell: (SLOCell *)cell other: (SLOCell *)other {
-    XCTAssertEqual(cell.number, other.number);
-    XCTAssertEqual(cell.isOpen, other.isOpen);
-    XCTAssertEqual(cell.isFlag, other.isFlag);
-    XCTAssertEqual(cell.isQFlag, other.isQFlag);
+- (void)testSLOCellIsEqual {
+    SLOCell * cell = [[SLOCell alloc] initWithNumber:7];
+    
+    SLOCell * cell2 = [[SLOCell alloc] initWithNumber:7];
+    XCTAssertEqualObjects(cell, cell2);
+    
+    SLOCell * cell3 = [[SLOCell alloc] initWithNumber:7];
+    [cell3 setQFlag];
+    XCTAssertNotEqualObjects(cell, cell3);
+    
+    SLOCell * cell4 = [[SLOCell alloc] initWithNumber:7];
+    [cell4 setFlag];
+    XCTAssertNotEqualObjects(cell, cell4);
+    
+    SLOCell * cell5 = [[SLOCell alloc] initWithNumber:7];
+    [cell5 setOpen];
+    XCTAssertNotEqualObjects(cell, cell5);
+    
+    SLOCell * cell6 = [[SLOCell alloc] initWithNumber:6];
+    XCTAssertNotEqualObjects(cell, cell6);
 }
 
 - (void)testSLOCellSeri {
     SLOCell * cell = [[SLOCell alloc] initWithNumber:7];
-    [self testSLOCell: cell other: [SLOCell fromWithData:[cell toData]]];
+    XCTAssertEqualObjects(cell, [SLOCell fromWithData:[cell toData]]);
     
     [cell setQFlag];
-    [self testSLOCell: cell other: [SLOCell fromWithData:[cell toData]]];
+    XCTAssertEqualObjects(cell, [SLOCell fromWithData:[cell toData]]);
     
     [cell setFlag];
-    [self testSLOCell: cell other: [SLOCell fromWithData:[cell toData]]];
+    XCTAssertEqualObjects(cell, [SLOCell fromWithData:[cell toData]]);
     
     [cell isOpen];
-    [self testSLOCell: cell other: [SLOCell fromWithData:[cell toData]]];
+    XCTAssertEqualObjects(cell, [SLOCell fromWithData:[cell toData]]);
+}
+
+- (void)testSLGameIsEqual {
+    SLOGame * game1 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
+    SLOGame * game2 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
+    XCTAssertEqualObjects(game1, game2);
+    
+    SLOGame * game3 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:98];
+    SLOGame * game4 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
+    XCTAssertNotEqualObjects(game3, game4);
 }
 
 - (void)testSLOGameSeri {
