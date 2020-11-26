@@ -32,6 +32,7 @@
 @property(nonatomic, strong)UIButton *autoRunButton;
 @property(nonatomic, strong)UIButton *starButton;
 @property(nonatomic, strong)UIButton *nextStepButton;
+@property(nonatomic, strong)UIButton *saveButton;
 @property(nonatomic, strong)UITextView *runInfoView;
 @property(nonatomic, strong)NSOperationQueue *backgroundQueue;
 
@@ -82,6 +83,14 @@
         _nextStepButton = [[UIButton alloc] init];
     
     return _nextStepButton;
+}
+
+- (UIButton *)saveButton
+{
+    if(!_saveButton)
+        _saveButton = [[UIButton alloc] init];
+    
+    return _saveButton;
 }
 
 - (UIButton *)starButton
@@ -207,6 +216,17 @@
     [self layoutRunInfoView];
     [self layoutStarButton];
     [self layoutNextStepButton];
+    [self layoutSaveButton];
+}
+
+- (void)layoutSaveButton
+{
+    CGRect nextStepButtonRect = CGRectMake(CELLWIDTH * 17, (self.game.height + 1) * CELLHEIGHT, CELLSIZE.width * 2, CELLSIZE.height);
+    [self.saveButton setFrame:nextStepButtonRect];
+    [self.view addSubview:self.saveButton];
+    [self.saveButton setTitle:@"save" forState:UIControlStateNormal];
+    [self.saveButton setBackgroundColor:[[UIColor alloc] initWithRed:251 / 256.0 green:194 / 256.0 blue:44/256.0 alpha:1.0]];
+    [self.saveButton addTarget:self action:@selector(saveGame:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)layoutNextStepButton
@@ -226,6 +246,12 @@
          //[NSThread sleepForTimeInterval:0.5];
          //[self clickCellButton:cellButton];
      }];
+}
+
+- (void)saveGame:(UIButton *)sender {
+    NSString * appDirectory = NSHomeDirectory();
+    NSString * path = [NSString stringWithFormat:@"%@/%@", appDirectory, @"game.save.plist"];
+    [NSFileManager.defaultManager createFileAtPath:path contents:[self.game toData] attributes:nil];
 }
 
 - (void)layoutStarButton
