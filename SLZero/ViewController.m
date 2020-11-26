@@ -149,9 +149,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.gameWidth = 20;
-    self.gameHeight = 10;
-    self.mineNumber = 40;
+    self.gameWidth = 30;
+    self.gameHeight = 16;
+    self.mineNumber = 99;
     
 }
 
@@ -248,10 +248,20 @@
      }];
 }
 
-- (void)saveGame:(UIButton *)sender {
+- (void)saveGameFile:(SLOGame *)game {
     NSString * appDirectory = NSHomeDirectory();
     NSString * path = [NSString stringWithFormat:@"%@/%@", appDirectory, @"game.save.plist"];
-    [NSFileManager.defaultManager createFileAtPath:path contents:[self.game toData] attributes:nil];
+    [NSFileManager.defaultManager createFileAtPath:path contents:[game toData] attributes:nil];
+}
+
+- (SLOGame *)restoreGameFile {
+    NSString * appDirectory = NSHomeDirectory();
+    NSString * path = [NSString stringWithFormat:@"%@/%@", appDirectory, @"game.restore.plist"];
+    return [SLOGame fromWithData:[NSFileManager.defaultManager contentsAtPath:path]];
+}
+
+- (void)saveGame:(UIButton *)sender {
+    [self saveGameFile:self.game];
 }
 
 - (void)layoutStarButton
@@ -385,6 +395,8 @@
 {
     self.game = nil;
     self.autoRun = nil;
+    
+//    self.game = [self restoreGameFile];
     [self updateAllView];
 
 }
