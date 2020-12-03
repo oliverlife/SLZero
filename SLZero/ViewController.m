@@ -18,7 +18,7 @@
 #define CELLSIZE CGSizeMake(CELLWIDTH, CELLHEIGHT)
 #define CELLZONEORIGIN CGPointMake(10,10)
 
-@interface ViewController ()
+@interface ViewController () <SLOGameObserver>
 
 @property(nonatomic, strong)SLOGame *game;
 @property NSUInteger gameWidth;
@@ -168,6 +168,8 @@
 
 -(void)updateAllView
 {
+    [self.game addGameObserver:self];
+    [self.game addGameObserver:self.autoRun];
     [self updateMineView];
     [self updateGameStateLable];
 }
@@ -357,15 +359,10 @@
 {
     SLOGameCellIndex *cellIndex = [self.game translateCellIndexWithSingleIndex:[self findCellButton:sender]];
     [self addLogInfo:[cellIndex debugDescription]];
-    NSArray *openedCellIndexArr = [self.game openCellWithCellIndex:cellIndex];
-    [self addLogInfo:[NSString stringWithFormat:@"openedCell = %lu", [openedCellIndexArr count]]];
-    {
-        for(SLOGameCellIndex *openCellIndex in openedCellIndexArr)
-        {
-            [self.autoRun updateFormulaSetWithCellIndexArr:[self.game aroundCellIndex:openCellIndex]];
-        }
-        [self.autoRun updateFormulaSetWithCellIndexArr:openedCellIndexArr];
-    }
+    [self.game openCellWithCellIndex:cellIndex];
+}
+
+- (void)updateOpenedCells:(NSArray *)openedCellIndexArr withGame:(SLOGame *)game {
     [self updateCellButton:openedCellIndexArr];
     [self updateGameStateLable];
 }

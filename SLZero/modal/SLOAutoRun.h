@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SLOGame.h"
 
-@interface SLOAutoRun : NSObject
+@interface SLOAutoRun : NSObject<SLOGameObserver>
 
 - (id)initWithSLOGame:(SLOGame *)game;
 - (void)clearFormulaSet;

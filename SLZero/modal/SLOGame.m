@@ -19,6 +19,8 @@
 @property(nonatomic, assign)BOOL isWin;
 @property(nonatomic, strong, readwrite)NSArray* randomMineArr;
 
+@property(nonatomic, strong, readwrite) NSMutableArray* observerArray;
+
 @end
 
 @implementation SLOGame
@@ -37,6 +39,14 @@
         _randomMineArr = [self randomMine:self.size mineNumber:self.mineNumber];
         
     return _randomMineArr;
+}
+
+- (NSMutableArray *)observerArray {
+    if (!_observerArray) {
+        _observerArray = [NSMutableArray array];
+    }
+    
+    return _observerArray;
 }
 
 - (NSArray *)aroundCellIndex:(SLOGameCellIndex *)cellIndex
@@ -159,6 +169,7 @@
         [openedCellArr addObject:[self translateCellIndexWithXIndex:xIndex yIndex:yIndex]];
     
     [self updateGameState];
+    [self notifyGameOpenedCells:openedCellArr];
     return openedCellArr;
 }
 
@@ -278,6 +289,20 @@
     result.randomMineArr = randomMineArr;
     result.cellArr = cellArr;
     return result;
+}
+
+- (void)notifyGameOpenedCells: (NSArray *)cells {
+    for(NSUInteger i = 0; i < self.observerArray.count; ++i) {
+        [self.observerArray[i] updateOpenedCells:cells withGame:self];
+    }
+}
+
+- (void)addGameObserver:(id<SLOGameObserver>)observer {
+    [self.observerArray addObject:observer];
+}
+
+- (void)removeGameObserver:(id<SLOGameObserver>)observer {
+    [self.observerArray removeObject:observer];
 }
 
 @end

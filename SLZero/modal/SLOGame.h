@@ -10,6 +10,12 @@
 #import "SLOCell.h"
 #import "SLOGameCellIndex.h"
 
+@class SLOGame;
+
+@protocol SLOGameObserver <NSObject>
+- (void)updateOpenedCells: (NSArray *)cells withGame: (SLOGame *)game;
+@end
+
 @interface SLOGame : NSObject
 
 @property(nonatomic, assign, readonly)NSUInteger height;
@@ -33,5 +39,8 @@
 
 - (NSData *)toData;
 + (SLOGame *)fromWithData: (NSData *) data;
+
+- (void)addGameObserver: (id<SLOGameObserver>) observer;
+- (void)removeGameObserver: (id<SLOGameObserver>) observer;
 
 @end

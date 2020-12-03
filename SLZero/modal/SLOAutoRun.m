@@ -165,4 +165,12 @@
     return returnValue;
 }
 
+- (void)updateOpenedCells:(NSArray *)cells withGame:(SLOGame *)game {
+    for(SLOGameCellIndex *openCellIndex in cells)
+    {
+        [self updateFormulaSetWithCellIndexArr:[self.game aroundCellIndex:openCellIndex]];
+    }
+    [self updateFormulaSetWithCellIndexArr:cells];
+}
+
 @end
