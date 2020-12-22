@@ -15,6 +15,7 @@
 
 @property(nonatomic, weak)SLOGame *game;
 @property(nonatomic, strong)SLOFormulaSet *formulaSet;
+@property(nonatomic, strong)NSMutableArray<id<SLOAutoRunObserver>> *observers;
 
 @end
 
@@ -43,6 +44,16 @@
 - (void)clearFormulaSet
 {
     self.formulaSet = nil;
+}
+
+- (NSMutableArray<id<SLOAutoRunObserver>> *)observers
+{
+    if (_observers == nil)
+    {
+        _observers = [NSMutableArray array];
+    }
+    
+    return _observers;
 }
 
 - (SLOGameCellIndex *)nextEmptyCell
@@ -171,6 +182,28 @@
         [self updateFormulaSetWithCellIndexArr:[self.game aroundCellIndex:openCellIndex]];
     }
     [self updateFormulaSetWithCellIndexArr:cells];
+}
+
+// MARK: SLOAutoRunObserver
+
+- (void)addObserver:(id<SLOAutoRunObserver>) observer
+{
+    [self.observers addObject:observer];
+}
+
+- (void)removeObserver:(id<SLOAutoRunObserver>) observer
+{
+    [self.observers removeObject:observer];
+}
+
+- (void)notifyUpdateWillOpenCell: (SLOGameCellIndex *)cellIndex
+{
+    for(id<SLOAutoRunObserver> observer in self.observers)
+    {
+        if ([observer respondsToSelector:@selector(updateWillOpenCell:withGame:)]) {
+            [observer updateWillOpenCell:cellIndex withGame:self.game];
+        }
+    }
 }
 
 @end
