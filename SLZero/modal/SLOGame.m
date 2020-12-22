@@ -21,6 +21,9 @@
 
 @property(nonatomic, strong, readwrite) NSMutableArray* observerArray;
 
+- (NSArray *)openCellWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex;
+- (SLOCell *)getCellWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex;
+
 @end
 
 @implementation SLOGame
@@ -293,7 +296,10 @@
 
 - (void)notifyGameOpenedCells: (NSArray *)cells {
     for(NSUInteger i = 0; i < self.observerArray.count; ++i) {
-        [self.observerArray[i] updateOpenedCells:cells withGame:self];
+        id<SLOGameObserver> observer = self.observerArray[i];
+        if ([observer respondsToSelector: @selector(updateOpenedCells:withGame:)]) {
+            [self.observerArray[i] updateOpenedCells:cells withGame:self];
+        }
     }
 }
 

@@ -27,9 +27,7 @@
 @property(nonatomic, strong, readonly)NSArray* randomMineArr;
 
 - (id)initWithWidth:(NSUInteger)width height:(NSUInteger)height mineNumber:(NSUInteger)mineNumber;
-- (NSArray *)openCellWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex;
 - (NSArray *)openCellWithCellIndex:(SLOGameCellIndex *)cellIndex;
-- (SLOCell *)getCellWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex;
 - (SLOCell *)getCellWithCellIndex:(SLOGameCellIndex *)cellIndex;
 - (SLOGameCellIndex *)translateCellIndexWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex;
 - (SLOGameCellIndex *)translateCellIndexWithSingleIndex:(NSUInteger)index;
