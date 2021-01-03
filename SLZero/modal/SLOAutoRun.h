@@ -10,7 +10,7 @@
 #import "SLOGame.h"
 
 @protocol SLOAutoRunObserver <NSObject>
-- (void)updateWillOpenCell: (SLOGameCellIndex *) cell withGame: (SLOGame *)game;
+- (void)nextOpenCell: (SLOGameCellIndex *) cell withGame: (SLOGame *)game;
 @end
 
 @interface SLOAutoRun : NSObject<SLOGameObserver>

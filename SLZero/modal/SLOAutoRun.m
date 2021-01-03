@@ -196,12 +196,12 @@
     [self.observers removeObject:observer];
 }
 
-- (void)notifyUpdateWillOpenCell: (SLOGameCellIndex *)cellIndex
+- (void)notifyNextOpenCell: (SLOGameCellIndex *)cellIndex
 {
     for(id<SLOAutoRunObserver> observer in self.observers)
     {
-        if ([observer respondsToSelector:@selector(updateWillOpenCell:withGame:)]) {
-            [observer updateWillOpenCell:cellIndex withGame:self.game];
+        if ([observer respondsToSelector:@selector(nextOpenCell:withGame:)]) {
+            [observer nextOpenCell:cellIndex withGame:self.game];
         }
     }
 }
