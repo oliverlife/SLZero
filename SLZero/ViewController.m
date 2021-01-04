@@ -28,7 +28,7 @@
 @property(nonatomic, strong)UIButton *resetGameButton;
 @property(nonatomic, strong)UILabel *gameStateLable;
 @property(nonatomic, strong)UILabel *gameCellIndexInfo;
-@property(nonatomic, strong)SLOAutoRunner *autoRun;
+@property(nonatomic, strong)SLOAutoRunner *autoRunner;
 @property(nonatomic, strong)UIButton *autoRunButton;
 @property(nonatomic, strong)UIButton *starButton;
 @property(nonatomic, strong)UIButton *nextStepButton;
@@ -61,12 +61,12 @@
     return _game;
 }
 
-- (SLOAutoRunner *)autoRun
+- (SLOAutoRunner *)autoRunner
 {
-    if(!_autoRun)
-        _autoRun = [[SLOAutoRunner alloc] initWithSLOGame:self.game];
+    if(!_autoRunner)
+        _autoRunner = [[SLOAutoRunner alloc] initWithSLOGame:self.game];
     
-    return _autoRun;
+    return _autoRunner;
 }
 
  - (UIButton *)autoRunButton
@@ -169,8 +169,8 @@
 -(void)updateAllView
 {
     [self.game addGameObserver:self];
-    [self.game addGameObserver:self.autoRun];
-    [self.autoRun addObserver:self];
+    [self.game addGameObserver:self.autoRunner];
+    [self.autoRunner addObserver:self];
     [self updateMineView];
     [self updateGameStateLable];
 }
@@ -213,7 +213,7 @@
     [self.view addSubview:self.autoRunButton];
     [self.autoRunButton setTitle:@"autoRun" forState:UIControlStateNormal];
     [self.autoRunButton setBackgroundColor:[[UIColor alloc] initWithRed:181 / 256.0 green:230 / 256.0 blue:29/256.0 alpha:1.0]];
-    [self.autoRunButton addTarget:self action:@selector(autoRun:) forControlEvents:UIControlEventTouchUpInside];
+    [self.autoRunButton addTarget:self action:@selector(autoRunner:) forControlEvents:UIControlEventTouchUpInside];
     
     [self layoutGameStateLable];
     [self layoutRunInfoView];
@@ -320,7 +320,7 @@
 {
     [self pushLog:@"backgroundAutoRun"];
     NSOperation *autoRunOpeation = [NSBlockOperation blockOperationWithBlock:^{
-        [self.autoRun next];
+        [self.autoRunner next];
     }];
     [self.backgroundQueue addOperation:autoRunOpeation];
 }
@@ -383,7 +383,7 @@
 - (void)resetGame:(UIButton *)sender
 {
     self.game = nil;
-    self.autoRun = nil;
+    self.autoRunner = nil;
     
 //    self.game = [self restoreGameFile];
     [self updateAllView];
