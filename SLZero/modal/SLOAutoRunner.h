@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SLOGame.h"
 
-@protocol SLOAutoRunObserver <NSObject>
-- (void)nextOpenCell: (SLOGameCellIndex *) cell withGame: (SLOGame *)game;
+@class SLOAutoRunner;
+
+@protocol SLOAutoRunnerObserver <NSObject>
+- (void)nextOpenCell: (SLOGameCellIndex *) cell withRunner: (SLOAutoRunner *)runner;
 @end
 
 @interface SLOAutoRunner : NSObject<SLOGameObserver>
@@ -20,7 +22,7 @@
 - (void)next;
 - (void)updateFormulaSetWithCellIndexArr:(NSArray *)cellIndexArr;
 
-- (void)addObserver:(id<SLOAutoRunObserver>) observer;
-- (void)removeObserver:(id<SLOAutoRunObserver>) observer;
+- (void)addObserver:(id<SLOAutoRunnerObserver>) observer;
+- (void)removeObserver:(id<SLOAutoRunnerObserver>) observer;
 
 @end

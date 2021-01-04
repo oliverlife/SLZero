@@ -18,7 +18,7 @@
 #define CELLSIZE CGSizeMake(CELLWIDTH, CELLHEIGHT)
 #define CELLZONEORIGIN CGPointMake(10,10)
 
-@interface ViewController () <SLOGameObserver, SLOAutoRunObserver>
+@interface ViewController () <SLOGameObserver, SLOAutoRunnerObserver>
 
 @property(nonatomic, strong)SLOGame *game;
 @property NSUInteger gameWidth;
@@ -352,7 +352,7 @@
     [self updateGameStateLable];
 }
 
-- (void)nextOpenCell:(SLOGameCellIndex *)cellIndex withGame:(SLOGame *)game {
+- (void)nextOpenCell:(SLOGameCellIndex *)cellIndex withRunner:(SLOAutoRunner *)runner {
     NSBlockOperation *autoRunFinishedOperation = [NSBlockOperation blockOperationWithBlock:^{
         [self autoRunFinished:cellIndex];
     }];
