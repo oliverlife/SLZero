@@ -13,7 +13,7 @@
 - (void)nextOpenCell: (SLOGameCellIndex *) cell withGame: (SLOGame *)game;
 @end
 
-@interface SLOAutoRun : NSObject<SLOGameObserver>
+@interface SLOAutoRunner : NSObject<SLOGameObserver>
 
 - (id)initWithSLOGame:(SLOGame *)game;
 - (void)clearFormulaSet;

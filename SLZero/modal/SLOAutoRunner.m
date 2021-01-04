@@ -6,12 +6,12 @@
 //  Copyright © 2015年 李智. All rights reserved.
 //
 
-#import "SLOAutoRun.h"
+#import "SLOAutoRunner.h"
 #import "SLOGameFormula.h"
 #import "SLOFormulaSet.h"
 #import "OLog.h"
 
-@interface SLOAutoRun()
+@interface SLOAutoRunner()
 
 @property(nonatomic, weak)SLOGame *game;
 @property(nonatomic, strong)SLOFormulaSet *formulaSet;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation SLOAutoRun
+@implementation SLOAutoRunner
 
 - (id)initWithSLOGame:(SLOGame *)game
 {
@@ -179,6 +179,11 @@
 - (void)next {
     SLOGameCellIndex * cellIndex = [self _next];
     [self notifyNextOpenCell: cellIndex];
+}
+
+- (void)run
+{
+    
 }
 
 - (void)updateOpenedCells:(NSArray *)cells withGame:(SLOGame *)game {

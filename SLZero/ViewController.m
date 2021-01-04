@@ -10,7 +10,7 @@
 #import "SLOGame.h"
 #import "OCellButton.h"
 #import "modal/SLOGameCellIndex.h"
-#import "modal/SLOAutoRun.h"
+#import "modal/SLOAutoRunner.h"
 #import "OLog.h"
 
 #define CELLWIDTH 30
@@ -28,7 +28,7 @@
 @property(nonatomic, strong)UIButton *resetGameButton;
 @property(nonatomic, strong)UILabel *gameStateLable;
 @property(nonatomic, strong)UILabel *gameCellIndexInfo;
-@property(nonatomic, strong)SLOAutoRun *autoRun;
+@property(nonatomic, strong)SLOAutoRunner *autoRun;
 @property(nonatomic, strong)UIButton *autoRunButton;
 @property(nonatomic, strong)UIButton *starButton;
 @property(nonatomic, strong)UIButton *nextStepButton;
@@ -61,10 +61,10 @@
     return _game;
 }
 
-- (SLOAutoRun *)autoRun
+- (SLOAutoRunner *)autoRun
 {
     if(!_autoRun)
-        _autoRun = [[SLOAutoRun alloc] initWithSLOGame:self.game];
+        _autoRun = [[SLOAutoRunner alloc] initWithSLOGame:self.game];
     
     return _autoRun;
 }
