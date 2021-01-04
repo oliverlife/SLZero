@@ -213,7 +213,7 @@
     [self.view addSubview:self.autoRunButton];
     [self.autoRunButton setTitle:@"autoRun" forState:UIControlStateNormal];
     [self.autoRunButton setBackgroundColor:[[UIColor alloc] initWithRed:181 / 256.0 green:230 / 256.0 blue:29/256.0 alpha:1.0]];
-    [self.autoRunButton addTarget:self action:@selector(autoRunner:) forControlEvents:UIControlEventTouchUpInside];
+    [self.autoRunButton addTarget:self action:@selector(autoRun:) forControlEvents:UIControlEventTouchUpInside];
     
     [self layoutGameStateLable];
     [self layoutRunInfoView];
