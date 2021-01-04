@@ -18,7 +18,7 @@
 #define CELLSIZE CGSizeMake(CELLWIDTH, CELLHEIGHT)
 #define CELLZONEORIGIN CGPointMake(10,10)
 
-@interface ViewController () <SLOGameObserver>
+@interface ViewController () <SLOGameObserver, SLOAutoRunObserver>
 
 @property(nonatomic, strong)SLOGame *game;
 @property NSUInteger gameWidth;
@@ -170,6 +170,7 @@
 {
     [self.game addGameObserver:self];
     [self.game addGameObserver:self.autoRun];
+    [self.autoRun addObserver:self];
     [self updateMineView];
     [self updateGameStateLable];
 }
@@ -243,11 +244,7 @@
 
 - (void)nextStep:(UIButton *)sender
 {
-    [self backgroundAutoRun:^(OCellButton *cellButton)
-     {
-         //[NSThread sleepForTimeInterval:0.5];
-         //[self clickCellButton:cellButton];
-     }];
+    [self autoRun: nil];
 }
 
 - (void)saveGameFile:(SLOGame *)game {
@@ -321,28 +318,14 @@
 
 - (void)autoRun:(UIButton *)sender
 {
-    [self backgroundAutoRun:^(OCellButton *cellButton)
-     {
-         [NSThread sleepForTimeInterval:0.5];
-         [self clickCellButton:cellButton];
-         [self autoRun:nil];
-     }];
-}
-
-- (void)backgroundAutoRun:(void(^)(OCellButton *))block
-{
     [self pushLog:@"backgroundAutoRun"];
     NSOperation *autoRunOpeation = [NSBlockOperation blockOperationWithBlock:^{
-        SLOGameCellIndex *cellIndex = [self.autoRun next];
-        NSBlockOperation *autoRunFinishedOperation = [NSBlockOperation blockOperationWithBlock:^{
-            [self autoRunFinished:cellIndex block:block];
-        }];
-        [[NSOperationQueue mainQueue] addOperation:autoRunFinishedOperation];
+        [self.autoRun next];
     }];
     [self.backgroundQueue addOperation:autoRunOpeation];
 }
 
-- (void)autoRunFinished:(SLOGameCellIndex *)cellIndex block:(void(^)(OCellButton *))block
+- (void)autoRunFinished:(SLOGameCellIndex *)cellIndex
 {
     [self popLog];
     OCellButton *cellButton = [self getCellButtonWithCellIndex:cellIndex];
@@ -350,7 +333,9 @@
     {
         [cellButton setBackgroundColor:[UIColor greenColor]];
         [[NSOperationQueue mainQueue] addOperation:[NSBlockOperation blockOperationWithBlock:^{
-            block(cellButton);
+            [NSThread sleepForTimeInterval:0.5];
+            [self clickCellButton:cellButton];
+            [self autoRun:nil];
         }]];
     }
 }
@@ -365,6 +350,13 @@
 - (void)updateOpenedCells:(NSArray *)openedCellIndexArr withGame:(SLOGame *)game {
     [self updateCellButton:openedCellIndexArr];
     [self updateGameStateLable];
+}
+
+- (void)nextOpenCell:(SLOGameCellIndex *)cellIndex withGame:(SLOGame *)game {
+    NSBlockOperation *autoRunFinishedOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [self autoRunFinished:cellIndex];
+    }];
+    [[NSOperationQueue mainQueue] addOperation:autoRunFinishedOperation];
 }
 
 - (void)updateGameStateLable

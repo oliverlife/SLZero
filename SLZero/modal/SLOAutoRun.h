@@ -17,7 +17,7 @@
 
 - (id)initWithSLOGame:(SLOGame *)game;
 - (void)clearFormulaSet;
-- (SLOGameCellIndex *)next;
+- (void)next;
 - (void)updateFormulaSetWithCellIndexArr:(NSArray *)cellIndexArr;
 
 - (void)addObserver:(id<SLOAutoRunObserver>) observer;

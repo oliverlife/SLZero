@@ -160,7 +160,7 @@
     return newFormulaArr;
 }
 
-- (SLOGameCellIndex *)next
+- (SLOGameCellIndex *)_next
 {
     SLOGameCellIndex *returnValue = nil;
     if(self.game.isLost || self.game.isWin)
@@ -174,6 +174,11 @@
         returnValue = [self nextEmptyCell];
     }
     return returnValue;
+}
+
+- (void)next {
+    SLOGameCellIndex * cellIndex = [self _next];
+    [self notifyNextOpenCell: cellIndex];
 }
 
 - (void)updateOpenedCells:(NSArray *)cells withGame:(SLOGame *)game {
