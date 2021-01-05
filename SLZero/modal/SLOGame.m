@@ -45,6 +45,7 @@
 }
 
 - (NSMutableArray *)observerArray {
+    //TODO: 持有observer可能导致内存泄露
     if (!_observerArray) {
         _observerArray = [NSMutableArray array];
     }

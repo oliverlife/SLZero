@@ -48,6 +48,7 @@
 
 - (NSMutableArray<id<SLOAutoRunnerObserver>> *)observers
 {
+    //TODO: 持有observer可能导致内存泄露
     if (_observers == nil)
     {
         _observers = [NSMutableArray array];
