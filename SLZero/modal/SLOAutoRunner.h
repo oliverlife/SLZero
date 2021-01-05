@@ -22,7 +22,7 @@
 - (void)next;
 - (void)updateFormulaSetWithCellIndexArr:(NSArray *)cellIndexArr;
 
-- (void)addObserver:(id<SLOAutoRunnerObserver>) observer;
-- (void)removeObserver:(id<SLOAutoRunnerObserver>) observer;
+- (void)addAutoRunnerObserver:(id<SLOAutoRunnerObserver>) observer;
+- (void)removeAutoRunnerObserver:(id<SLOAutoRunnerObserver>) observer;
 
 @end

@@ -170,7 +170,7 @@
 {
     [self.game addGameObserver:self];
     [self.game addGameObserver:self.autoRunner];
-    [self.autoRunner addObserver:self];
+    [self.autoRunner addAutoRunnerObserver:self];
     [self updateMineView];
     [self updateGameStateLable];
 }

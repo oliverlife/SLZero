@@ -196,12 +196,12 @@
 
 // MARK: SLOAutoRunObserver
 
-- (void)addObserver:(id<SLOAutoRunnerObserver>) observer
+- (void)addAutoRunnerObserver:(id<SLOAutoRunnerObserver>) observer
 {
     [self.observers addObject:observer];
 }
 
-- (void)removeObserver:(id<SLOAutoRunnerObserver>) observer
+- (void)removeAutoRunnerObserver:(id<SLOAutoRunnerObserver>) observer
 {
     [self.observers removeObject:observer];
 }
