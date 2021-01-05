@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import "SLOCell.h"
 #import "SLOGame.h"
+#import "SLOAutoRunner.h"
+#import "SLOAutoRunnerGame.h"
 
 @interface SLZeroTests : XCTestCase
 
@@ -97,6 +99,21 @@
         // Put the code you want to measure the time of here.
         NSUInteger a = 1 + 1;
     }];
+}
+
+- (void)testAutoRunner {
+    NSString * path = [self testFilePath:@"game.w9.h9.m10.plist"];
+    [self measureBlock:^{
+        SLOGame * game = [SLOGame fromWithData: [NSFileManager.defaultManager contentsAtPath:path]];
+        [self testAutoRunnerWithGame:game];
+    }];
+}
+
+- (void)testAutoRunnerWithGame: (SLOGame *)game {
+    SLOAutoRunner * runner = [[SLOAutoRunner alloc] initWithSLOGame:game];
+    SLOAutoRunnerGame * autoRunnerGame = [[SLOAutoRunnerGame alloc] initWithAutoRunner:runner withGame:game];
+    [autoRunnerGame run];
+    XCTAssertTrue([game isWin]);
 }
 
 @end
