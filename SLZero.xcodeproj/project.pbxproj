@@ -21,6 +21,7 @@
 		6D85CF5D2575C60800E176D4 /* game.w30.h16.m99.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D85CF5C2575C60800E176D4 /* game.w30.h16.m99.plist */; };
 		6D8D14E91BBAE7B80016D044 /* SLOFormulaSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */; };
 		6DD2CB9A25A4BD6F0054B074 /* game.w9.h9.m10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2CB9925A4BD6F0054B074 /* game.w9.h9.m10.plist */; };
+		6DD2CB9D25A4CB6E0054B074 /* SLOAutoRunnerGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2CB9C25A4CB6E0054B074 /* SLOAutoRunnerGame.m */; };
 		6DD4CA351BB681610002A7D6 /* OCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD4CA341BB681610002A7D6 /* OCellButton.m */; };
 		6DD4CA3B1BB684240002A7D6 /* SLOGameCellIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD4CA3A1BB684240002A7D6 /* SLOGameCellIndex.m */; };
 		6DD589811BB91D4B005A38F7 /* SLOGameFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD589801BB91D4B005A38F7 /* SLOGameFormula.m */; };
@@ -72,6 +73,8 @@
 		6D8D14E71BBAE7B80016D044 /* SLOFormulaSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOFormulaSet.h; path = modal/SLOFormulaSet.h; sourceTree = "<group>"; };
 		6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOFormulaSet.m; path = modal/SLOFormulaSet.m; sourceTree = "<group>"; };
 		6DD2CB9925A4BD6F0054B074 /* game.w9.h9.m10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = game.w9.h9.m10.plist; sourceTree = "<group>"; };
+		6DD2CB9B25A4CB6E0054B074 /* SLOAutoRunnerGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SLOAutoRunnerGame.h; path = modal/SLOAutoRunnerGame.h; sourceTree = "<group>"; };
+		6DD2CB9C25A4CB6E0054B074 /* SLOAutoRunnerGame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SLOAutoRunnerGame.m; path = modal/SLOAutoRunnerGame.m; sourceTree = "<group>"; };
 		6DD4CA331BB681610002A7D6 /* OCellButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCellButton.h; sourceTree = "<group>"; };
 		6DD4CA341BB681610002A7D6 /* OCellButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCellButton.m; sourceTree = "<group>"; };
 		6DD4CA391BB684240002A7D6 /* SLOGameCellIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOGameCellIndex.h; path = modal/SLOGameCellIndex.h; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 				6D3500E51BBA2FD600276A5F /* SLOAutoRunner.m */,
 				6D8D14E71BBAE7B80016D044 /* SLOFormulaSet.h */,
 				6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */,
+				6DD2CB9B25A4CB6E0054B074 /* SLOAutoRunnerGame.h */,
+				6DD2CB9C25A4CB6E0054B074 /* SLOAutoRunnerGame.m */,
 			);
 			name = modal;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				6DD828F01BC814BF00EB724C /* OLog.m in Sources */,
 				6D40405B1BA6FD7500475F85 /* SLOGame.m in Sources */,
 				6D3500E61BBA2FD600276A5F /* SLOAutoRunner.m in Sources */,
+				6DD2CB9D25A4CB6E0054B074 /* SLOAutoRunnerGame.m in Sources */,
 				6D73DE321BA31A6A0020A443 /* SLOCell.m in Sources */,
 				6D73DDFF1BA313090020A443 /* main.m in Sources */,
 			);
