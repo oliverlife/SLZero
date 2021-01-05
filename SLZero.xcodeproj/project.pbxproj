@@ -20,6 +20,7 @@
 		6D73DE321BA31A6A0020A443 /* SLOCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73DE311BA31A6A0020A443 /* SLOCell.m */; };
 		6D85CF5D2575C60800E176D4 /* game.w30.h16.m99.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D85CF5C2575C60800E176D4 /* game.w30.h16.m99.plist */; };
 		6D8D14E91BBAE7B80016D044 /* SLOFormulaSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */; };
+		6DD2CB9A25A4BD6F0054B074 /* game.w9.h9.m10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2CB9925A4BD6F0054B074 /* game.w9.h9.m10.plist */; };
 		6DD4CA351BB681610002A7D6 /* OCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD4CA341BB681610002A7D6 /* OCellButton.m */; };
 		6DD4CA3B1BB684240002A7D6 /* SLOGameCellIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD4CA3A1BB684240002A7D6 /* SLOGameCellIndex.m */; };
 		6DD589811BB91D4B005A38F7 /* SLOGameFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD589801BB91D4B005A38F7 /* SLOGameFormula.m */; };
@@ -70,6 +71,7 @@
 		6D85CF5C2575C60800E176D4 /* game.w30.h16.m99.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = game.w30.h16.m99.plist; sourceTree = "<group>"; };
 		6D8D14E71BBAE7B80016D044 /* SLOFormulaSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOFormulaSet.h; path = modal/SLOFormulaSet.h; sourceTree = "<group>"; };
 		6D8D14E81BBAE7B80016D044 /* SLOFormulaSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOFormulaSet.m; path = modal/SLOFormulaSet.m; sourceTree = "<group>"; };
+		6DD2CB9925A4BD6F0054B074 /* game.w9.h9.m10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = game.w9.h9.m10.plist; sourceTree = "<group>"; };
 		6DD4CA331BB681610002A7D6 /* OCellButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCellButton.h; sourceTree = "<group>"; };
 		6DD4CA341BB681610002A7D6 /* OCellButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCellButton.m; sourceTree = "<group>"; };
 		6DD4CA391BB684240002A7D6 /* SLOGameCellIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOGameCellIndex.h; path = modal/SLOGameCellIndex.h; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		6D73DE161BA313090020A443 /* SLZeroTests */ = {
 			isa = PBXGroup;
 			children = (
+				6DD2CB9925A4BD6F0054B074 /* game.w9.h9.m10.plist */,
 				6D85CF5C2575C60800E176D4 /* game.w30.h16.m99.plist */,
 				6DFD35FD25717766009918D0 /* game.w20.h10.m40.plist */,
 				6D73DE171BA313090020A443 /* SLZeroTests.m */,
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D85CF5D2575C60800E176D4 /* game.w30.h16.m99.plist in Resources */,
+				6DD2CB9A25A4BD6F0054B074 /* game.w9.h9.m10.plist in Resources */,
 				6DFD35FE25717767009918D0 /* game.w20.h10.m40.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
