@@ -123,7 +123,7 @@
     {
         SLOGameFormula *newFormula = [[SLOGameFormula alloc] initWithCellIndexArr:anFormula.cellIndexArr mineNumberL:0 mineNumberR:[anFormula.cellIndexArr count] + 1 parentFormula:nil];
         [newFormula reduceScope:anFormula];
-        [_coreFormulaSet addObject:newFormula];
+        [self addObjectToCoreFormulaSet:newFormula];
         isChanged = YES;
     }
     if(isChanged)
@@ -134,6 +134,10 @@
     }
     
     return isChanged;
+}
+
+- (void)addObjectToCoreFormulaSet:(SLOGameFormula *)anFormula {
+    [_coreFormulaSet addObject:anFormula];
 }
 
 @end
