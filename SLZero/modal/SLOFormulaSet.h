@@ -12,7 +12,7 @@
 
 @interface SLOFormulaSet : NSObject
 
-@property(nonatomic, strong, readonly)NSMutableArray *coreFormulaSet;
+@property(nonatomic, strong, readonly)NSArray *coreFormulaSet;
 - (id)initWithGame:(SLOGame *)game;
 - (void)updateFormulaSetWithCellIndexArr:(NSArray *)cellIndexArr;
 - (BOOL)addObject:(SLOGameFormula *)anFormula;
