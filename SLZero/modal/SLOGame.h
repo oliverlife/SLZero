@@ -28,6 +28,7 @@
 
 - (id)initWithWidth:(NSUInteger)width height:(NSUInteger)height mineNumber:(NSUInteger)mineNumber;
 - (NSArray *)openCellWithCellIndex:(SLOGameCellIndex *)cellIndex;
+- (void)unopenCellWithCellIndex:(SLOGameCellIndex *)cellIndex;
 - (SLOCell *)getCellWithCellIndex:(SLOGameCellIndex *)cellIndex;
 - (SLOGameCellIndex *)translateCellIndexWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex;
 - (SLOGameCellIndex *)translateCellIndexWithSingleIndex:(NSUInteger)index;

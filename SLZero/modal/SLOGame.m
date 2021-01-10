@@ -197,6 +197,11 @@
     return [self openCellWithXIndex:cellIndex.x yIndex:cellIndex.y];
 }
 
+- (void)unopenCellWithCellIndex:(SLOGameCellIndex *)cellIndex {
+    SLOCell *cell = [self getCellWithXIndex:cellIndex.x yIndex:cellIndex.y];
+    cell.isOpen = NO;
+    [self notifyUpdateCellsOpenedStatus:@[cellIndex]];
+}
 
 - (SLOCell *)getCellWithXIndex:(NSInteger)xIndex yIndex:(NSInteger)yIndex
 {

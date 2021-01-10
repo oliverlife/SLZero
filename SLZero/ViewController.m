@@ -188,8 +188,8 @@
          ];
         
         [cellButton addTarget:self
-                       action:@selector(clickCellButton:)
-             forControlEvents:UIControlEventTouchUpInside
+                       action:@selector(clickOutCellButton:)
+             forControlEvents:UIControlEventTouchUpOutside
          ];
         
         [self.view addSubview:cellButton];
@@ -349,6 +349,11 @@
     [self.game openCellWithCellIndex:cellIndex];
 }
 
+- (void)clickOutCellButton:(UIButton *)sender
+{
+    SLOGameCellIndex *cellIndex = [self.game translateCellIndexWithSingleIndex:[self findCellButton:sender]];
+    [self.game unopenCellWithCellIndex:cellIndex];
+}
 
 - (void)updateCellsOpenedStatus:(NSArray *)openedCellIndexArr withGame:(SLOGame *)game {
     [self updateCellButton:openedCellIndexArr];
