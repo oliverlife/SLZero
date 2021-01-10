@@ -13,7 +13,7 @@
 @class SLOGame;
 
 @protocol SLOGameObserver <NSObject>
-- (void)updateOpenedCells: (NSArray *)cells withGame: (SLOGame *)game;
+- (void)updateCellsOpenedStatus: (NSArray *)cells withGame: (SLOGame *)game;
 @end
 
 @interface SLOGame : NSObject

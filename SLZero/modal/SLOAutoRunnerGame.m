@@ -44,7 +44,7 @@
     [self.game openCellWithCellIndex:cell];
 }
 
-- (void)updateOpenedCells:(NSArray *)cells withGame:(SLOGame *)game {
+- (void)updateCellsOpenedStatus:(NSArray *)cells withGame:(SLOGame *)game {
     [self openNextCellIndex];
 }
 

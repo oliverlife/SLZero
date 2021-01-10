@@ -173,7 +173,7 @@
         [openedCellArr addObject:[self translateCellIndexWithXIndex:xIndex yIndex:yIndex]];
     
     [self updateGameState];
-    [self notifyGameOpenedCells:openedCellArr];
+    [self notifyUpdateCellsOpenedStatus:openedCellArr];
     return openedCellArr;
 }
 
@@ -295,11 +295,11 @@
     return result;
 }
 
-- (void)notifyGameOpenedCells: (NSArray *)cells {
+- (void)notifyUpdateCellsOpenedStatus: (NSArray *)cells {
     for(NSUInteger i = 0; i < self.observerArray.count; ++i) {
         id<SLOGameObserver> observer = self.observerArray[i];
-        if ([observer respondsToSelector: @selector(updateOpenedCells:withGame:)]) {
-            [self.observerArray[i] updateOpenedCells:cells withGame:self];
+        if ([observer respondsToSelector: @selector(updateCellsOpenedStatus:withGame:)]) {
+            [self.observerArray[i] updateCellsOpenedStatus:cells withGame:self];
         }
     }
 }

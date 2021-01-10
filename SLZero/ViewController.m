@@ -349,7 +349,8 @@
     [self.game openCellWithCellIndex:cellIndex];
 }
 
-- (void)updateOpenedCells:(NSArray *)openedCellIndexArr withGame:(SLOGame *)game {
+
+- (void)updateCellsOpenedStatus:(NSArray *)openedCellIndexArr withGame:(SLOGame *)game {
     [self updateCellButton:openedCellIndexArr];
     [self updateGameStateLable];
 }
