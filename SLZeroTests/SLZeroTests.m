@@ -71,7 +71,7 @@
 
 - (void)testSLGameIsEqual {
     SLOGame * game1 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
-    SLOGame * game2 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:99];
+    SLOGame * game2 = game1;
     XCTAssertEqualObjects(game1, game2);
     
     SLOGame * game3 = [[SLOGame alloc] initWithWidth:30 height:16 mineNumber:98];
