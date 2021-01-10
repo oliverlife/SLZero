@@ -249,7 +249,9 @@
 
 - (void)saveGameFile:(SLOGame *)game {
     NSString * appDirectory = NSHomeDirectory();
-    NSString * path = [NSString stringWithFormat:@"%@/%@", appDirectory, @"game.save.plist"];
+    NSString * fileName = [NSString stringWithFormat:@"game.save.w%lu.h%lu.m%lu.plist", game.width, game.height, game.mineNumber];
+    NSString * path = [NSString stringWithFormat:@"%@/%@", appDirectory, fileName];
+    NSLog(@"Save Game:\n path: %@", path);
     [NSFileManager.defaultManager createFileAtPath:path contents:[game toData] attributes:nil];
 }
 
